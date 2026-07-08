@@ -1,0 +1,583 @@
+/* ============================================================
+   隤脰”?亥岷蝟餌絞 - 銝餅見撘?   style.css
+   ============================================================ */
+
+/* ?? Google Font ???????????????????????????????????????????? */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
+/* ?? CSS 霈 ??????????????????????????????????????????????? */
+:root {
+    --bg-from:    #f0f9ff;
+    --bg-via:     #e0f2fe;
+    --bg-to:      #bae6fd;
+    --glass-bg:   rgba(255, 255, 255, 0.7);
+    --glass-bdr:  rgba(255, 255, 255, 0.9);
+    --glass-blur: blur(20px);
+    --accent:     #0284c7;
+    --accent-dim: rgba(2, 132, 199, 0.15);
+    --accent2:    #4f46e5;
+    --text:       #1e293b;
+    --text-primary: #0f172a;
+    --text-dim:   #475569;
+    --danger:     #ef4444;
+    --success:    #22c55e;
+    --warn:       #eab308;
+    --card-radius:1rem;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-lg:  0 25px 50px rgba(0,0,0,0.4);
+    --shadow-md:  0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* ?? Reset & Base ??????????????????????????????????????????? */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-via) 50%, var(--bg-to) 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+/* ?? ???蝎? ???????????????????????????????????????????? */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(2,132,199,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(79,70,229,0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ?? ?餌??∠? ??????????????????????????????????????????????? */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-bdr);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ?? 閬?摰孵 ??????????????????????????????????????????????? */
+.view {
+    position: relative;
+    z-index: 1;
+    display: none;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--transition), transform var(--transition);
+}
+.view.active {
+    display: flex;
+    animation: fadeUp var(--transition) forwards;
+}
+.view.result-active {
+    display: block;
+    animation: fadeUp var(--transition) forwards;
+}
+@keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ?? ?餃 & ?亥岷閬? (?蝵桐葉) ????????????????????????????? */
+#loginView, #queryView {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+/* ?? ?餃?∠? ??????????????????????????????????????????????? */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 2.5rem 2rem;
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.login-logo .logo-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 8px 24px rgba(56,189,248,0.3);
+}
+.login-logo h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+}
+.login-logo p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.2rem;
+}
+
+/* ?? 銵典?辣 ??????????????????????????????????????????????? */
+.form-group { margin-bottom: 1.1rem; }
+.form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.form-control {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0.6rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    outline: none;
+}
+.form-control:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.form-control::placeholder { color: var(--text-dim); }
+.form-control option { background: #fff; color: var(--text-primary); }
+
+/* ?? ?? ??????????????????????????????????????????????????? */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.65rem 1.4rem;
+    border: none;
+    border-radius: 0.6rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(56,189,248,0.25);
+}
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(56,189,248,0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(16,185,129,0.25);
+}
+.btn-success:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(16,185,129,0.4);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--glass-bdr);
+}
+.btn-ghost:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.2);
+}
+
+.btn-print {
+    background: rgba(251,191,36,0.15);
+    color: var(--warn);
+    border: 1px solid rgba(251,191,36,0.3);
+}
+.btn-print:hover {
+    background: rgba(251,191,36,0.25);
+    transform: translateY(-1px);
+}
+
+.btn-block { width: 100%; }
+
+/* ?? Spinner ???????????????????????????????????????????????? */
+.spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+}
+.spinner.show { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ?? 霅血?閮 ??????????????????????????????????????????????? */
+.alert {
+    padding: 0.7rem 1rem;
+    border-radius: 0.6rem;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    display: none;
+}
+.alert.show { display: block; }
+.alert-danger  { background: rgba(248,113,113,0.12); border: 1px solid rgba(248,113,113,0.3); color: var(--danger); }
+.alert-warning { background: rgba(251,191,36,0.12);  border: 1px solid rgba(251,191,36,0.3);  color: var(--warn);   }
+.alert-info    { background: rgba(56,189,248,0.12);  border: 1px solid rgba(56,189,248,0.3);  color: var(--accent); }
+
+/* ?? ??蝺?????????????????????????????????????????????????? */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1rem 0;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--glass-bdr);
+}
+
+/* ?? ?亥岷?∠? ??????????????????????????????????????????????? */
+.query-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 2.5rem 2rem;
+}
+.query-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+/* ?? 蝯?閬? ??????????????????????????????????????????????? */
+#resultView {
+    padding: 1.5rem 1rem 3rem;
+}
+.result-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ?? Action Bar ????????????????????????????????????????????? */
+.action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.action-bar-left { display: flex; align-items: center; gap: 0.75rem; }
+.action-bar-right { display: flex; gap: 0.5rem; }
+
+/* ?? 隤脰”璅? ??????????????????????????????????????????????? */
+.schedule-title {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ?? 隤脰”銵冽 ??????????????????????????????????????????????? */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+.schedule-table th, .schedule-table td {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 0.3rem;
+    vertical-align: middle;
+}
+.schedule-table thead th {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.th-period {
+    width: 80px;
+}
+.schedule-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.3);
+}
+.schedule-table tbody tr:hover {
+    background: rgba(2, 132, 199, 0.05);
+}
+
+/* 蝭甈?cell */
+.td-period {
+    background: rgba(0, 0, 0, 0.02);
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+.period-num {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+.period-time {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin-top: 0.2rem;
+}
+
+/* 隤脩? cell */
+.td-cell {
+    height: 75px;
+}
+
+/* 隤脩??批捆 */
+.cell-subject {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+.cell-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+.cell-link {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.cell-link:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* 蝛箏? */
+.td-empty {
+    background: transparent;
+}
+
+/* ?? Loading Overlay ???????????????????????????????????????? */
+#loadingOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 100;
+    display: none;
+}
+#loadingOverlay.show { display: flex; }
+#loadingOverlay .big-spinner {
+    width: 48px; height: 48px;
+    border: 3px solid rgba(56,189,248,0.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+#loadingOverlay p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+/* ?? ???內 chip (autocomplete) ??????????????????????????? */
+.suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    min-height: 0;
+}
+.chip {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(56,189,248,0.25);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.chip:hover {
+    background: rgba(56,189,248,0.3);
+    transform: translateY(-1px);
+}
+
+/* ?? ?餃?? ??????????????????????????????????????????????? */
+.logout-btn {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.4rem;
+}
+
+/* ?? ??撌亙憿?????????????????????????????????????????????? */
+.hidden { display: none !important; }
+
+/* ?? ?亥岷璅???????????????????????????????????????????????? */
+.query-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+}
+.query-header h2 { margin: 0; font-size: 1.2rem; }
+
+.semester-badge {
+    font-size: 0.72rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    margin-top: 0.3rem;
+    display: inline-block;
+}
+
+/* ?? ????Tab ?????????????????????????????????????????????? */
+.tab-bar {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    background: rgba(255,255,255,0.04);
+    border-radius: 0.6rem;
+    padding: 0.3rem;
+}
+.tab-btn {
+    flex: 1;
+    padding: 0.55rem 0.5rem;
+    border: none;
+    border-radius: 0.45rem;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.tab-btn.active {
+    background: rgba(56,189,248,0.15);
+    color: var(--accent);
+    box-shadow: 0 2px 8px rgba(56,189,248,0.15);
+}
+.tab-panel { }
+
+/* ?? 撟渡??詨??憛?????????????????????????????????????????????? */
+.grade-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.65rem;
+}
+.grade-label {
+    flex-shrink: 0;
+    width: 4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.25rem 0.4rem;
+    border-radius: 0.4rem;
+}
+.grade-7  { background: rgba(56,189,248,0.15);  color: #38bdf8; }
+.grade-8  { background: rgba(129,140,248,0.15); color: #818cf8; }
+.grade-9  { background: rgba(74,222,128,0.15);  color: #4ade80; }
+.grade-sp { background: rgba(251,191,36,0.15);  color: #fbbf24; }
+.grade-select { flex: 1; }
+
+/* ?? ?踵?撘?????????????????????????????????????????????????? */
+@media (max-width: 640px) {
+    .login-card, .query-card { padding: 2rem 1.25rem; }
+    .schedule-title { font-size: 1.2rem; }
+    .action-bar { flex-direction: column; align-items: flex-start; }
+    .timetable { min-width: 500px; }
+    .timetable thead th { font-size: 0.75rem; padding: 0.6rem 0.3rem; }
+    .cell-subject { font-size: 0.82rem; }
+    .cell-link { font-size: 0.7rem; }
+}
+
+/* ?? ?璅?? ??????????????????????????????????????????????? */
+@media print {
+    body { background: #fff !important; color: #000 !important; }
+    body::before { display: none; }
+    #loginView, #queryView, #loadingOverlay { display: none !important; }
+    .action-bar { display: none !important; }
+    #resultView { display: block !important; opacity: 1 !important; padding: 0 !important; }
+    .result-inner { max-width: 100%; }
+    .glass-card, .table-wrapper { box-shadow: none !important; background: transparent !important; }
+
+    .schedule-title {
+        font-size: 1.4rem;
+        -webkit-text-fill-color: #000 !important;
+        color: #000 !important;
+        background: none !important;
+    }
+
+    .timetable { min-width: 0; width: 100%; }
+    .timetable thead th {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+        border: 1px solid #aaa !important;
+    }
+    .timetable tbody th,
+    .timetable tbody td {
+        border: 1px solid #aaa !important;
+        color: #000 !important;
+        background: #fff !important;
+    }
+    .timetable .time-cell { color: #444 !important; }
+    .cell-subject { color: #000 !important; font-size: 0.9rem; }
+    .cell-link {
+        color: #000 !important;
+        background: #eee !important;
+        font-size: 0.78rem;
+    }
+    .cell-empty { color: #ccc !important; }
+    @page { size: A4 landscape; margin: 0.6in; }
+}
+/* 課表容器 RWD */
+#scheduleTableContainer {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    background: var(--glass-bg);
+}
