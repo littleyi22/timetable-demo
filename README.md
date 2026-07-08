@@ -2,6 +2,8 @@
 
 這是一個由 AI 驅動的靜態網頁課表查詢系統樣板。只要您有學校的課表檔案（PDF、Excel 或 Word），交給您的 AI 助手（例如 ChatGPT, Claude 或 Gemini），並附上這個 Repo 的連結，AI 就會自動幫您將課表轉成精美的響應式查詢網站！
 
+👉 **[線上展示網站 (Live Demo)](https://littleyi22.github.io/timetable-demo/)**
+
 ---
 
 ## 🤖 給 AI 助手的 Prompt (使用說明)
